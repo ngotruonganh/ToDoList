@@ -1,9 +1,9 @@
 import React from "react";
-import "./Banner.scss";
-import AddTodo from "./AddTodo";
+import "./Home.scss";
+import AddTodo from "../../components/AddTodo";
 import { toast } from "react-toastify";
 
-class Banner extends React.Component {
+class Home extends React.Component {
   state = {
     listToDo: [
       { id: "1", title: "Wake up" },
@@ -130,4 +130,4 @@ class Banner extends React.Component {
   }
 }
 
-export default Banner;
+export default Home;
