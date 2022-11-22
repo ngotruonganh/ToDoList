@@ -61,6 +61,7 @@ class Home extends React.Component {
     });
   };
 
+  //   on chang press
   handleOnChangeeditToDo = (event) => {
     let editToDoCopy = { ...this.state.editToDo };
     editToDoCopy.title = event.target.value;
@@ -70,9 +71,8 @@ class Home extends React.Component {
   };
 
   render() {
-    let { listToDo ,editToDo } = this.state;
+    let { listToDo, editToDo } = this.state;
     let isEmptyObj = Object.keys(editToDo).length === 0;
-    console.log(isEmptyObj);
     return (
       <div className="input-container">
         <div>
@@ -110,15 +110,17 @@ class Home extends React.Component {
                   )}
                   <div className="todo-list-right">
                     <button className="edit" onClick={() => this.onEdit(item)}>
-                      {isEmptyObj === false && editToDo.id === item.id
-                        ? "Save"
-                        : "Edit"}
+                      {isEmptyObj === false && editToDo.id === item.id ? (
+                        <i className="fa-sharp fa-solid fa-floppy-disk"></i>
+                      ) : (
+                        <i className="fa-solid fa-pen-to-square"></i>
+                      )}
                     </button>
                     <button
                       className="edit"
                       onClick={() => this.onDelete(item)}
                     >
-                      Delete
+                      <i className="fa-solid fa-trash-can"></i>
                     </button>
                   </div>
                 </div>

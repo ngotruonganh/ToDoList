@@ -63,7 +63,7 @@ class AddTodo extends React.Component {
           placeholder="Thêm công việc mới"
         />
         <button type="button" onClick={() => this.handleClick()}>
-          Thêm
+        <i className="fa-solid fa-plus"></i>
         </button>
       </div>
     );

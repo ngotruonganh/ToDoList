@@ -9,7 +9,7 @@ class App extends React.Component {
       <div className="App">
         <Home />
         <ToastContainer
-          position="top-right"
+          position="top-left"
           autoClose={1200}
           hideProgressBar={false}
           newestOnTop={false}
