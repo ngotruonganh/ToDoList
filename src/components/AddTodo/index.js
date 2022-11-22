@@ -54,18 +54,20 @@ class AddTodo extends React.Component {
   render() {
     let { title } = this.state;
     return (
-      <div className="input-field">
-        <input
-          type="text"
-          value={title}
-          onChange={(event) => this.handleOnChange(event)}
-          onKeyPress={(event) => this.enterkey(event)}
-          placeholder="Thêm công việc mới"
-        />
-        <button type="button" onClick={() => this.handleClick()}>
-        <i className="fa-solid fa-plus"></i>
-        </button>
-      </div>
+      <>
+        <div className="input-field">
+          <input
+            type="text"
+            value={title}
+            onChange={(event) => this.handleOnChange(event)}
+            onKeyPress={(event) => this.enterkey(event)}
+            placeholder="Thêm công việc mới"
+          />
+          <button type="button" onClick={() => this.handleClick()}>
+            <i className="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </>
     );
   }
 }

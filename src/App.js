@@ -9,12 +9,12 @@ class App extends React.Component {
       <div className="App">
         <Home />
         <ToastContainer
-          position="top-left"
+          position="top-right"
           autoClose={1200}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
-          rtl={false}
+          rtl={true}
           pauseOnFocusLoss
           draggable
           pauseOnHover

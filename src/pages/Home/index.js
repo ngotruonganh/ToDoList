@@ -11,8 +11,11 @@ class Home extends React.Component {
       { id: "3", title: "Working" },
       { id: "4", title: "Sleeping" },
       { id: "5", title: "Watching" },
+      { id: "6", title: "Playing" },
+      { id: "7", title: "Swimming" },
+      { id: "8", title: "Holding" },
+      { id: "9", title: "Do homework" },
     ],
-    editStatus: false,
     editToDo: {},
   };
 
@@ -74,60 +77,65 @@ class Home extends React.Component {
     let { listToDo, editToDo } = this.state;
     let isEmptyObj = Object.keys(editToDo).length === 0;
     return (
-      <div className="input-container">
-        <div>
-          <h1> To Do List </h1>
-        </div>
-        <AddTodo addNewToDo={this.addNewToDo} />
-        <div className="list-todo">
-          {listToDo &&
-            listToDo.length > 0 &&
-            listToDo.map((item, index) => {
-              return (
-                <div className="todo-list-container" key={item.id}>
-                  {isEmptyObj === true ? (
-                    <span>
-                      {index + 1} - {item.title}
-                    </span>
-                  ) : (
-                    <>
-                      {editToDo.id === item.id ? (
-                        <span>
-                          {index + 1}
-                          <input
-                            value={editToDo.title}
-                            onChange={(event) =>
-                              this.handleOnChangeeditToDo(event)
-                            }
-                          />
-                        </span>
-                      ) : (
-                        <span>
-                          {index + 1} - {item.title}
-                        </span>
-                      )}
-                    </>
-                  )}
-                  <div className="todo-list-right">
-                    <button className="edit" onClick={() => this.onEdit(item)}>
-                      {isEmptyObj === false && editToDo.id === item.id ? (
-                        <i className="fa-sharp fa-solid fa-floppy-disk"></i>
-                      ) : (
-                        <i className="fa-solid fa-pen-to-square"></i>
-                      )}
-                    </button>
-                    <button
-                      className="edit"
-                      onClick={() => this.onDelete(item)}
-                    >
-                      <i className="fa-solid fa-trash-can"></i>
-                    </button>
+      <>
+        <div className="input-container">
+          <div>
+            <h1> To Do List </h1>
+          </div>
+          <AddTodo addNewToDo={this.addNewToDo} />
+          <div className="list-todo">
+            {listToDo &&
+              listToDo.length > 0 &&
+              listToDo.map((item, index) => {
+                return (
+                  <div className="todo-list-container" key={item.id}>
+                    {isEmptyObj === true ? (
+                      <span>
+                        {index + 1} - {item.title}
+                      </span>
+                    ) : (
+                      <>
+                        {editToDo.id === item.id ? (
+                          <span>
+                            {index + 1}
+                            <input
+                              value={editToDo.title}
+                              onChange={(event) =>
+                                this.handleOnChangeeditToDo(event)
+                              }
+                            />
+                          </span>
+                        ) : (
+                          <span>
+                            {index + 1} - {item.title}
+                          </span>
+                        )}
+                      </>
+                    )}
+                    <div className="todo-list-right">
+                      <button
+                        className="edit"
+                        onClick={() => this.onEdit(item)}
+                      >
+                        {isEmptyObj === false && editToDo.id === item.id ? (
+                          <i className="fa-sharp fa-solid fa-floppy-disk"></i>
+                        ) : (
+                          <i className="fa-solid fa-pen-to-square"></i>
+                        )}
+                      </button>
+                      <button
+                        className="edit"
+                        onClick={() => this.onDelete(item)}
+                      >
+                        <i className="fa-solid fa-trash-can"></i>
+                      </button>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }
