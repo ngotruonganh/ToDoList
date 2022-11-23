@@ -17,6 +17,7 @@ class Home extends React.Component {
       { id: "9", title: "Do homework" },
     ],
     editToDo: {},
+    onModal: false,
   };
 
   // Add new to do function
@@ -35,6 +36,12 @@ class Home extends React.Component {
       listToDo: currenTodo,
     });
     toast.success("Xóa thành công");
+  };
+
+  onModal = () => {
+    this.setState({
+      onModal: !this.state.onModal,
+    });
   };
 
   // Onclick Edit click
@@ -74,7 +81,7 @@ class Home extends React.Component {
   };
 
   render() {
-    let { listToDo, editToDo } = this.state;
+    let { listToDo, editToDo, onModal } = this.state;
     let isEmptyObj = Object.keys(editToDo).length === 0;
     return (
       <>
@@ -123,6 +130,24 @@ class Home extends React.Component {
                           <i className="fa-solid fa-pen-to-square"></i>
                         )}
                       </button>
+                      <button onClick={() => this.onModal(item)}>
+                        <i class="fa-solid fa-circle-info"></i>
+                      </button>
+                      {onModal === true && (
+                        <div
+                          className="model"
+                          //   onClick={() => this.onModal(item)}
+                        >
+                          <div className="overlay"></div>
+                          <div className="popup">
+                            <i
+                              class="fa-solid fa-circle-xmark"
+                              onClick={() => this.onModal(item)}
+                            ></i>
+                            {item.title}
+                          </div>
+                        </div>
+                      )}
                       <button
                         className="edit"
                         onClick={() => this.onDelete(item)}

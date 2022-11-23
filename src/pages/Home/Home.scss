@@ -51,6 +51,45 @@
                               background-color: rgb(200, 103, 29);
                               box-shadow: 5px 5px rgb(111, 99, 99);
                         }
+                        .model {
+                              position: fixed;
+                              top: 0;
+                              bottom: 0;
+                              left: 0;
+                              right: 0;
+                              animation: showModal linear 0.2s;
+                              .overlay {
+                                    position: absolute;
+                                    width: 100%;
+                                    height: 100%;
+                                    // background-color: black;
+                                    opacity: 0.1;
+                                    z-index: 2;
+                              }
+                              .popup {
+                                    position: relative;
+                                    width: 400px;
+                                    height: 300px;
+                                    border-radius: 10px;
+                                    background-color: white;
+                                    animation: showModal linear 0.2s;
+                                    border-radius: 10px;
+                                    text-align: center;
+                                    margin: 50px auto;
+                                    padding: 40px 20px;
+                                    z-index: 3;
+                              }
+                              @keyframes showModal {
+                                    from {
+                                          top: -200px;
+                                          opacity: 0;
+                                    }
+                                    to {
+                                          top: 0;
+                                          opacity: 1;
+                                    }
+                              }
+                        }
                   }
             }
       }
