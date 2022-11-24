@@ -1,7 +1,8 @@
 import React from "react";
+import { toast } from "react-toastify";
 import "./Home.scss";
 import AddTodo from "../../components/AddTodo";
-import { toast } from "react-toastify";
+import Test from "../Test/index";
 
 class Home extends React.Component {
   state = {
@@ -158,6 +159,9 @@ class Home extends React.Component {
                   </div>
                 );
               })}
+          </div>
+          <div>
+            <Test childData={listToDo}/>
           </div>
         </div>
       </>
