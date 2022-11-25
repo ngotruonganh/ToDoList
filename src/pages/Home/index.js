@@ -132,7 +132,7 @@ class Home extends React.Component {
                         )}
                       </button>
                       <button onClick={() => this.onModal(item)}>
-                        <i class="fa-solid fa-circle-info"></i>
+                        <i className="fa-solid fa-circle-info"></i>
                       </button>
                       {onModal === true && (
                         <div
@@ -142,7 +142,7 @@ class Home extends React.Component {
                           <div className="overlay"></div>
                           <div className="popup">
                             <i
-                              class="fa-solid fa-circle-xmark"
+                              className="fa-solid fa-circle-xmark"
                               onClick={() => this.onModal(item)}
                             ></i>
                             {item.title}
@@ -161,7 +161,7 @@ class Home extends React.Component {
               })}
           </div>
           <div>
-            <Test childData={listToDo}/>
+            <Test childData={listToDo} />
           </div>
         </div>
       </>
