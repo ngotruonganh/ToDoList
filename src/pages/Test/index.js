@@ -9,7 +9,7 @@ class Test extends React.Component {
         {listextend.map((item, index) => {
           return (
             <p key={item.id}>
-              {index + 1} -{item.title}
+              {index + 1} - {item.title}
             </p>
           );
         })}
