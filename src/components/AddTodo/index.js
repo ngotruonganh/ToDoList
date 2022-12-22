@@ -2,10 +2,10 @@ import React from "react";
 import { toast } from "react-toastify";
 import "./AddTodo.scss";
 
-class AddTodo extends React.Component {
+class AddToDo extends React.Component {
   state = {
     title: "",
-    des: "",
+    description: "",
   };
 
   // thay doi state title moi khi nhap vao input
@@ -15,17 +15,17 @@ class AddTodo extends React.Component {
     });
   };
 
-  // thay doi state des moi khi nhap vao input
-  handleOnChangeDes = (event) => {
+  // thay doi state description moi khi nhap vao input
+  description = (event) => {
     this.setState({
-      des: event.target.value,
+      description: event.target.value,
     });
   };
 
   // Su kien tao moi cong viec (click chuot)
   handleClick = () => {
     // truong hop khong nhap gi
-    if (!this.state.title && !this.state.des) {
+    if (!this.state.title && !this.state.description) {
       toast.error("Vui lòng điền đầy đủ tiêu để và nội dung");
       return;
     }
@@ -34,22 +34,22 @@ class AddTodo extends React.Component {
       toast.error("Chưa nhập tiêu đề");
       return;
     }
-    // truong hop chi nhap vao des
-    if (!this.state.des) {
+    // truong hop chi nhap vao description
+    if (!this.state.description) {
       toast.error("Chưa nhập nội dung");
       return;
     }
     let todo = {
       id: Math.floor(Math.random() * 1001),
       title: this.state.title,
-      des: this.state.des,
+      description: this.state.description,
     };
     // truyen ham addnewtodo
     this.props.addNewToDo(todo);
     //set state lai
     this.setState({
       title: "",
-      des: "",
+      description: "",
     });
   };
 
@@ -57,7 +57,7 @@ class AddTodo extends React.Component {
   enterkey = (event) => {
     if (event.key === "Enter") {
       // truong hop khong nhap gi
-      if (!this.state.title && !this.state.des) {
+      if (!this.state.title && !this.state.description) {
         toast.error("Vui lòng điền đầy đủ tiêu để và nội dung");
         return;
       }
@@ -66,26 +66,28 @@ class AddTodo extends React.Component {
         toast.error("Chưa nhập tiêu đề");
         return;
       }
-      // truong hop chi nhap vao des
-      if (!this.state.des) {
+      // truong hop chi nhap vao description
+      if (!this.state.description) {
         toast.error("Chưa nhập nội dung");
         return;
       }
       let todo = {
         id: Math.floor(Math.random() * 1001),
         title: this.state.title,
-        des: this.state.des,
+        description: this.state.description,
       };
+      // truyen ham addnewtodo
       this.props.addNewToDo(todo);
+      //set state lai
       this.setState({
         title: "",
-        des: "",
+        description: "",
       });
     }
   };
 
   render() {
-    let { title, des } = this.state;
+    let { title, description } = this.state;
     return (
       <>
         <div className="input-field">
@@ -97,13 +99,13 @@ class AddTodo extends React.Component {
               onKeyDown={(event) => this.enterkey(event)}
               placeholder="Nhập tiêu đề công việc mới"
             />
-            <input
+            <textarea
               type="text"
-              value={des}
-              onChange={(event) => this.handleOnChangeDes(event)}
+              value={description}
+              onChange={(event) => this.description(event)}
               onKeyDown={(event) => this.enterkey(event)}
               placeholder="Nhập nội dung công việc mới"
-              className="des-type"
+              className="description-type"
             />
           </div>
           <button type="button" onClick={() => this.handleClick()}>
@@ -116,4 +118,4 @@ class AddTodo extends React.Component {
   }
 }
 
-export default AddTodo;
+export default AddToDo;

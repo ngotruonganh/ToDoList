@@ -1,7 +1,8 @@
 import React from "react";
 import { toast } from "react-toastify";
 import "./Home.scss";
-import AddTodo from "../../components/AddTodo";
+import AddTodo from "../../components/AddToDo";
+import AddToDoLocal from "../../components/AddToDoLocal";
 
 class Home extends React.Component {
   state = {
@@ -35,45 +36,20 @@ class Home extends React.Component {
       },
       { id: "8", title: "Do homework", des: "Coding" },
     ],
-    title: "",
-    des: "",
     editToDo: {},
-    onModal: false,
-  };
-  onChangTitle = (e) => {
-    this.setState({
-      title: e.target.value,
-    });
-  };
-  onChangDes = (e) => {
-    this.setState({
-      des: e.target.value,
-    });
   };
 
-  // Add new to do function
-  handleClick = () => {
-    let object = {
-      id: Math.floor(Math.random() * 1001),
-      title: this.state.title,
-      des: this.state.des,
-    };
-    let ToDoList = localStorage.getItem("todo");
-    if (ToDoList) {
-      let arr = JSON.parse(ToDoList);
-      arr.push(object);
-      localStorage.setItem("todo", JSON.stringify(arr));
-    } else {
-      localStorage.setItem("todo", JSON.stringify([object]));
-    }
+  //
+
+  // Add new to do to listToDo
+  addNewToDo = (todo) => {
     this.setState({
-      title: "",
-      des: "",
+      listToDo: [...this.state.listToDo, todo],
     });
     toast.success("Thêm thành công");
   };
 
-  // delete todo from toDoList
+  // Delete todo from toDoList
   onDelete = (todo) => {
     let currenTodo = this.state.listToDo;
     currenTodo = currenTodo.filter((item) => item.id !== todo.id);
@@ -83,13 +59,7 @@ class Home extends React.Component {
     toast.success("Xóa thành công");
   };
 
-  onModal = () => {
-    this.setState({
-      onModal: !this.state.onModal,
-    });
-  };
-
-  // Onclick Edit click
+  // Onclick Edit
   onEdit = (todo) => {
     let { editToDo, listToDo } = this.state;
 
@@ -116,8 +86,8 @@ class Home extends React.Component {
     });
   };
 
-  //   on chang press
-  handleOnChangeeditToDo = (event) => {
+  //   On chang press
+  handleOnChangeEditToDo = (event) => {
     let editToDoCopy = { ...this.state.editToDo };
     editToDoCopy.title = event.target.value;
     this.setState({
@@ -125,42 +95,16 @@ class Home extends React.Component {
     });
   };
 
-  addNewToDo = (todo) => {
-    this.setState({
-      listToDo: [...this.state.listToDo, todo],
-    });
-    toast.success("Thêm thành công");
-  };
-
   render() {
-    let { listToDo, editToDo, onModal } = this.state;
+    let { listToDo, editToDo } = this.state;
     let isEmptyObj = Object.keys(editToDo).length === 0;
-    let toDoList = localStorage.getItem("todo");
-    console.log("state", listToDo);
-    console.log("local", toDoList);
     return (
       <>
         <div className="input-container">
           <div>
             <h1> To Do List </h1>
           </div>
-          {/* <input
-            value={this.state.title}
-            placeholder="add new todo"
-            onChange={(e) => this.onChangTitle(e)}
-          />
-          <input
-            value={this.state.des}
-            placeholder="add des"
-            onChange={(e) => this.onChangDes(e)}
-          />
-          <button type="button" onClick={() => this.handleClick()}>
-            <i className="fa-solid fa-plus"></i>
-          </button>
-          {toDoList} */}
-          {/* <hr /> */}
           <AddTodo addNewToDo={this.addNewToDo} />
-          <br />
           <div className="list-todo">
             {listToDo &&
               listToDo.length > 0 &&
@@ -184,7 +128,7 @@ class Home extends React.Component {
                             <input
                               value={editToDo.title}
                               onChange={(event) =>
-                                this.handleOnChangeeditToDo(event)
+                                this.handleOnChangeEditToDo(event)
                               }
                             />
                           </span>
@@ -206,21 +150,6 @@ class Home extends React.Component {
                           <i className="fa-solid fa-pen-to-square"></i>
                         )}
                       </button>
-                      <button onClick={() => this.onModal()}>
-                        <i className="fa-solid fa-circle-info"></i>
-                      </button>
-                      {onModal === true && (
-                        <div className="model">
-                          <div className="overlay"></div>
-                          <div className="popup">
-                            <i
-                              className="close-btn fa-solid fa-circle-xmark"
-                              onClick={() => this.onModal()}
-                            ></i>
-                            <h1>{item.title}</h1>
-                          </div>
-                        </div>
-                      )}
                       <button
                         className="edit"
                         onClick={() => this.onDelete(item)}
@@ -233,6 +162,7 @@ class Home extends React.Component {
               })}
           </div>
         </div>
+        <AddToDoLocal />
       </>
     );
   }
