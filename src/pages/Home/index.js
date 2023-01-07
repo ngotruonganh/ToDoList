@@ -7,39 +7,42 @@ import AddToDoLocal from "../../components/AddToDoLocal";
 class Home extends React.Component {
   state = {
     listToDo: [
-      { id: "1", title: "Wake up", des: "wake up in 5am" },
+      { id: "1", title: "Wake up", description: "wake up in 5am" },
       {
         id: "2",
         title: "Eating",
-        des: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+        description:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
       },
       {
         id: "3",
         title: "Working",
-        des: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        description:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
       },
       {
         id: "4",
         title: "Sleeping",
-        des: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        description:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
       },
-      { id: "5", title: "Watching", des: "Waching football" },
+      { id: "5", title: "Watching", description: "Waching football" },
       {
         id: "6",
         title: "Playing",
-        des: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        description:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
       },
       {
         id: "7",
         title: "Swimming",
-        des: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        description:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
       },
-      { id: "8", title: "Do homework", des: "Coding" },
+      { id: "8", title: "Do homework", description: "Coding" },
     ],
     editToDo: {},
   };
-
-  //
 
   // Add new to do to listToDo
   addNewToDo = (todo) => {
@@ -47,6 +50,13 @@ class Home extends React.Component {
       listToDo: [...this.state.listToDo, todo],
     });
     toast.success("Thêm thành công");
+  };
+
+  onDetail = (todo) => {
+    let currenTodo = this.state.listToDo;
+    currenTodo = currenTodo.filter((item) => item.id === todo.id);
+    let test = JSON.stringify(currenTodo);
+    alert(test);
   };
 
   // Delete todo from toDoList
@@ -117,7 +127,7 @@ class Home extends React.Component {
                           <p className="title">
                             {index + 1} - {item.title}
                           </p>
-                          <p className="des">{item.des}</p>
+                          <p className="description">{item.description}</p>
                         </div>
                       </>
                     ) : (
@@ -152,6 +162,12 @@ class Home extends React.Component {
                       </button>
                       <button
                         className="edit"
+                        onClick={() => this.onDetail(item)}
+                      >
+                        <i className="fa-solid fa-circle-info"></i>
+                      </button>
+                      <button
+                        className="edit"
                         onClick={() => this.onDelete(item)}
                       >
                         <i className="fa-solid fa-trash-can"></i>
@@ -162,7 +178,7 @@ class Home extends React.Component {
               })}
           </div>
         </div>
-        <AddToDoLocal />
+        {/* <AddToDoLocal /> */}
       </>
     );
   }
