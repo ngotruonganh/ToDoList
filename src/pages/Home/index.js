@@ -1,26 +1,50 @@
 import React from "react";
 import { toast } from "react-toastify";
 import "./Home.scss";
-import AddTodo from "../../components/AddTodo";
+import AddTodo from "../../components/AddToDo";
+import AddToDoLocal from "../../components/AddToDoLocal";
 
 class Home extends React.Component {
   state = {
     listToDo: [
-      { id: "1", title: "Wake up" },
-      { id: "2", title: "Eating" },
-      { id: "3", title: "Working" },
-      { id: "4", title: "Sleeping" },
-      { id: "5", title: "Watching" },
-      { id: "6", title: "Playing" },
-      { id: "7", title: "Swimming" },
-      { id: "8", title: "Holding" },
-      { id: "9", title: "Do homework" },
+      { id: "1", title: "Wake up", description: "wake up in 5am" },
+      {
+        id: "2",
+        title: "Eating",
+        description:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+      },
+      {
+        id: "3",
+        title: "Working",
+        description:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+      },
+      {
+        id: "4",
+        title: "Sleeping",
+        description:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+      },
+      { id: "5", title: "Watching", description: "Waching football" },
+      {
+        id: "6",
+        title: "Playing",
+        description:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+      },
+      {
+        id: "7",
+        title: "Swimming",
+        description:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+      },
+      { id: "8", title: "Do homework", description: "Coding" },
     ],
     editToDo: {},
-    onModal: false,
   };
 
-  // Add new to do function
+  // Add new to do to listToDo
   addNewToDo = (todo) => {
     this.setState({
       listToDo: [...this.state.listToDo, todo],
@@ -28,7 +52,14 @@ class Home extends React.Component {
     toast.success("Thêm thành công");
   };
 
-  // delete todo from toDoList
+  onDetail = (todo) => {
+    let currenTodo = this.state.listToDo;
+    currenTodo = currenTodo.filter((item) => item.id === todo.id);
+    let test = JSON.stringify(currenTodo);
+    alert(test);
+  };
+
+  // Delete todo from toDoList
   onDelete = (todo) => {
     let currenTodo = this.state.listToDo;
     currenTodo = currenTodo.filter((item) => item.id !== todo.id);
@@ -38,13 +69,7 @@ class Home extends React.Component {
     toast.success("Xóa thành công");
   };
 
-  onModal = () => {
-    this.setState({
-      onModal: !this.state.onModal,
-    });
-  };
-
-  // Onclick Edit click
+  // Onclick Edit
   onEdit = (todo) => {
     let { editToDo, listToDo } = this.state;
 
@@ -71,8 +96,8 @@ class Home extends React.Component {
     });
   };
 
-  //   on chang press
-  handleOnChangeeditToDo = (event) => {
+  //   On chang press
+  handleOnChangeEditToDo = (event) => {
     let editToDoCopy = { ...this.state.editToDo };
     editToDoCopy.title = event.target.value;
     this.setState({
@@ -81,7 +106,7 @@ class Home extends React.Component {
   };
 
   render() {
-    let { listToDo, editToDo, onModal } = this.state;
+    let { listToDo, editToDo } = this.state;
     let isEmptyObj = Object.keys(editToDo).length === 0;
     return (
       <>
@@ -97,9 +122,14 @@ class Home extends React.Component {
                 return (
                   <div className="todo-list-container" key={item.id}>
                     {isEmptyObj === true ? (
-                      <span>
-                        {index + 1} - {item.title}
-                      </span>
+                      <>
+                        <div className="info">
+                          <p className="title">
+                            {index + 1} - {item.title}
+                          </p>
+                          <p className="description">{item.description}</p>
+                        </div>
+                      </>
                     ) : (
                       <>
                         {editToDo.id === item.id ? (
@@ -108,7 +138,7 @@ class Home extends React.Component {
                             <input
                               value={editToDo.title}
                               onChange={(event) =>
-                                this.handleOnChangeeditToDo(event)
+                                this.handleOnChangeEditToDo(event)
                               }
                             />
                           </span>
@@ -130,24 +160,12 @@ class Home extends React.Component {
                           <i className="fa-solid fa-pen-to-square"></i>
                         )}
                       </button>
-                      <button onClick={() => this.onModal(item)}>
+                      <button
+                        className="edit"
+                        onClick={() => this.onDetail(item)}
+                      >
                         <i className="fa-solid fa-circle-info"></i>
                       </button>
-                      {onModal === true && (
-                        <div
-                          className="model"
-                          //   onClick={() => this.onModal(item)}
-                        >
-                          <div className="overlay"></div>
-                          <div className="popup">
-                            <i
-                              className="fa-solid fa-circle-xmark"
-                              onClick={() => this.onModal(item)}
-                            ></i>
-                            {item.title}
-                          </div>
-                        </div>
-                      )}
                       <button
                         className="edit"
                         onClick={() => this.onDelete(item)}
@@ -160,6 +178,7 @@ class Home extends React.Component {
               })}
           </div>
         </div>
+        {/* <AddToDoLocal /> */}
       </>
     );
   }

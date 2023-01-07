@@ -1,96 +1,127 @@
 .input-container {
-      font-size: 2em;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  h1 {
+    font-size: 3rem;
+    margin-top: 1.2rem;
+  }
+  .list-todo {
+    margin: 30px 10% 0 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .todo-list-container {
       display: flex;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      h1 {
-            font-size: 3rem;
-            margin-top: 1.2rem;
+      justify-content: space-between;
+      border-bottom: 1px solid rgb(220, 104, 15);
+      padding-bottom: 10px;
+      flex-direction: row;
+      width: 100%;
+      margin: 0.5rem auto;
+      .info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        .des {
+          margin-top: 5px;
+          font-size: 1.3rem;
+          font-weight: 100;
+          text-align: left;
+          @media (min-width: 1000px) {
+            width: 80%;
+          }
+        }
       }
-      .list-todo {
-            margin: 30px 10% 0 10%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            .todo-list-container {
-                  display: flex;
-                  justify-content: space-between;
-                  border-bottom: 1px solid rgb(220, 104, 15);
-                  padding-bottom: 10px;
-                  flex-direction: row;
-                  width: 100%;
-                  margin: 0.5rem auto;
-                  span {
-                        input {
-                              border-radius: 8px;
-                              padding: 8px;
-                              border: none;
-                              font-size: 1.5rem;
-                              margin-left: 15px;
-                              &:focus {
-                                    outline: none;
-                                    box-shadow: 5px 5px rgb(111, 99, 99);
-                              }
-                        }
-                  }
-                  .todo-list-right {
-                        button {
-                              font-size: 2rem;
-                              margin-left: 10px;
-                              border-radius: 8px;
-                              border: none;
-                              padding: 5px;
-                              color: white;
-                              font-weight: 200;
-                              background-color: rgb(220, 104, 15);
-                        }
-                        button:hover {
-                              color: rgb(255, 255, 255);
-                              cursor: pointer;
-                              background-color: rgb(200, 103, 29);
-                              box-shadow: 5px 5px rgb(111, 99, 99);
-                        }
-                        .model {
-                              position: fixed;
-                              top: 0;
-                              bottom: 0;
-                              left: 0;
-                              right: 0;
-                              animation: showModal linear 0.2s;
-                              .overlay {
-                                    position: absolute;
-                                    width: 100%;
-                                    height: 100%;
-                                    // background-color: black;
-                                    opacity: 0.1;
-                                    z-index: 2;
-                              }
-                              .popup {
-                                    position: relative;
-                                    width: 400px;
-                                    height: 300px;
-                                    border-radius: 10px;
-                                    background-color: white;
-                                    animation: showModal linear 0.2s;
-                                    border-radius: 10px;
-                                    text-align: center;
-                                    margin: 50px auto;
-                                    padding: 40px 20px;
-                                    z-index: 3;
-                              }
-                              @keyframes showModal {
-                                    from {
-                                          top: -200px;
-                                          opacity: 0;
-                                    }
-                                    to {
-                                          top: 0;
-                                          opacity: 1;
-                                    }
-                              }
-                        }
-                  }
+      span {
+        input {
+          border-radius: 8px;
+          padding: 8px;
+          border: none;
+          font-size: 1.5rem;
+          margin-left: 15px;
+          &:focus {
+            outline: none;
+            box-shadow: 5px 5px rgb(111, 99, 99);
+          }
+        }
+      }
+      .todo-list-right {
+        display: flex;
+        align-items: center;
+        button {
+          font-size: 2rem;
+          margin-left: 10px;
+          border-radius: 8px;
+          border: none;
+          padding: 5px;
+          color: white;
+          font-weight: 200;
+          background-color: rgb(220, 104, 15);
+        }
+        button:hover {
+          color: rgb(255, 255, 255);
+          cursor: pointer;
+          background-color: rgb(200, 103, 29);
+          box-shadow: 5px 5px rgb(111, 99, 99);
+        }
+        .model {
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          animation: showModal linear 0.1s;
+          .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: 2;
+          }
+          .popup {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            border-radius: 10px;
+            background-color: white;
+            animation: showModal linear 0.1s;
+            text-align: center;
+            margin: 50px auto;
+            padding: 20px;
+            z-index: 3;
+            .close-btn {
+              display: flex;
+              justify-content: flex-end;
+              color: red;
+              &:hover {
+                cursor: pointer;
+              }
             }
+          }
+          @keyframes showModal {
+            from {
+              top: -200px;
+              opacity: 0;
+            }
+            to {
+              top: 0;
+              opacity: 1;
+            }
+          }
+        }
+        @media (max-width: 680px) {
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+        }
       }
+    }
+  }
 }
